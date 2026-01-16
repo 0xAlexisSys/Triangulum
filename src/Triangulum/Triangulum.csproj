@@ -1,0 +1,10 @@
+<Project Sdk="Godot.NET.Sdk/4.5.1">
+    <PropertyGroup>
+        <EnableDynamicLoading>true</EnableDynamicLoading>
+        <TargetFramework>net10.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="../Triangulum.Australe/Triangulum.Australe.csproj" />
+    </ItemGroup>
+</Project>

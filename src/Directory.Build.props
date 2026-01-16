@@ -1,0 +1,12 @@
+<Project>
+    <PropertyGroup>
+        <LangVersion>12</LangVersion>
+        <Nullable>enable</Nullable>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="$(MSBuildThisFileDirectory)GlobalNamespaces.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)GlobalAliases.cs"/>
+    </ItemGroup>
+</Project>

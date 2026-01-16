@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://fovv4s36yevp"]
+
+[ext_resource type="Script" uid="uid://cl0eyps0kyf8k" path="res://src/classes/AppCanvas.cs" id="1_elqb8"]
+[ext_resource type="Theme" uid="uid://d110fy56i8kkd" path="res://assets/themes/Triangulum.tres" id="4_nxtc6"]
+[ext_resource type="Script" uid="uid://do1tkh6bfgm4m" path="res://src/components/TextBox.cs" id="5_vcsgt"]
+[ext_resource type="Script" uid="uid://xdjforu247vd" path="res://src/components/NumberBox.cs" id="7_jlsqs"]
+
+[node name="AppCanvas" type="CanvasLayer"]
+script = ExtResource("1_elqb8")
+metadata/_custom_type_script = "uid://cl0eyps0kyf8k"
+
+[node name="TextBox" type="PanelContainer" parent="."]
+offset_left = 256.0
+offset_top = 245.0
+offset_right = 324.0
+offset_bottom = 281.0
+theme = ExtResource("4_nxtc6")
+theme_type_variation = &"TextBox"
+script = ExtResource("5_vcsgt")
+Value = "HAH"
+Enabled = false
+metadata/_custom_type_script = "uid://do1tkh6bfgm4m"
+
+[node name="NumberBox" type="PanelContainer" parent="."]
+offset_left = 406.0
+offset_top = 205.0
+offset_right = 502.0
+offset_bottom = 241.0
+theme = ExtResource("4_nxtc6")
+theme_type_variation = &"NumberBox"
+script = ExtResource("7_jlsqs")
+Value = 2037.5
+ValueType = 4
+MinValue = -4096.0
+MaxValue = 4097.0
+metadata/_custom_type_script = "uid://xdjforu247vd"
