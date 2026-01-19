@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://fovv4s36yevp"]
+
+[ext_resource type="Script" uid="uid://cl0eyps0kyf8k" path="res://classes/AppCanvas.cs" id="1_xt100"]
+[ext_resource type="Theme" uid="uid://d110fy56i8kkd" path="res://assets/themes/Triangulum.tres" id="2_eruk6"]
+[ext_resource type="Script" uid="uid://xdjforu247vd" path="res://components/NumberBox.cs" id="4_eruk6"]
+
+[node name="AppCanvas" type="CanvasLayer"]
+script = ExtResource("1_xt100")
+metadata/_custom_type_script = "uid://cl0eyps0kyf8k"
+
+[node name="NumberBox" type="PanelContainer" parent="."]
+offset_left = 159.0
+offset_top = 107.0
+offset_right = 255.0
+offset_bottom = 143.0
+theme = ExtResource("2_eruk6")
+theme_type_variation = &"NumberBox"
+script = ExtResource("4_eruk6")
+Value = 4.0
+Enabled = false
+metadata/_custom_type_script = "uid://xdjforu247vd"

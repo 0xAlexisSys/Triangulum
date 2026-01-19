@@ -4,7 +4,7 @@ using Triangulum.Australe.Extensions;
 
 namespace Triangulum.Components;
 
-[Tool, GlobalClass, Icon($"{IconsPath}/TextEdit.svg")]
+[GlobalClass, Icon($"{IconsPath}/TextEdit.svg"), Tool]
 internal partial class TextArea : Component
 {
     public const i64 InputBoxWrapLinesDisabled = (i64)TextEdit.LineWrappingMode.None;
@@ -34,7 +34,7 @@ internal partial class TextArea : Component
         NInputBox = new()
         {
             WrapMode = !InputBoxWrapLines ? TextEdit.LineWrappingMode.None : TextEdit.LineWrappingMode.Boundary,
-            CustomMinimumSize = StringEditMinSize,
+            CustomMinimumSize = ComponentInputMinSize,
             SizeFlagsVertical = SizeFlags.ExpandFill,
         };
         SetNodeIdentifier(NInputBox, "InputBox");

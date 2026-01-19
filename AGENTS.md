@@ -9,7 +9,8 @@ Triangulum is a general-purpose dynamic UI framework built with Godot Engine, le
 **Tech Stack:**
 
 - `Godot 4.5.1`
-- `C# 12.0`
+- `.NET 10.0`
+- `C# 14.0`
 
 **File Structure:**
 
@@ -146,6 +147,18 @@ f64 myDouble = 64.0D;
 f128 myDecimal = 128.0M;
 
 iLG myBigInteger = iLG.Zero;
+```
+
+If the number is a compile-time type alias, use an explicit cast and omit the literal.
+
+```
+#if !GODOT_REAL_T_IS_DOUBLE
+global using RealT = System.Single;
+#else
+global using RealT = System.Double;
+#endif
+
+GDVector2 position = new((RealT)64.0, (RealT)128.0);
 ```
 
 ---

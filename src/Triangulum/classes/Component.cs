@@ -9,6 +9,10 @@ using Triangulum.Australe.Extensions;
 
 namespace Triangulum.Classes;
 
+/// <summary>
+/// Base class for all dynamic UI components.
+/// </summary>
+[GlobalClass]
 internal abstract partial class Component : PanelContainer
 {
 	/// <summary>
@@ -24,7 +28,7 @@ internal abstract partial class Component : PanelContainer
 	}
 
 	private const BindingFlags SetterHookMethodBindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static;
-	private const BindingFlags BackingFieldBindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;
+	private const BindingFlags PropertyBindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;
 
 	#if TOOLS
 	protected readonly List<Func<string>> ConfigurationWarningMethods = [];
@@ -45,7 +49,7 @@ internal abstract partial class Component : PanelContainer
     {
 		if (_deferredSetterMethods != null)
 		{
-			foreach (Action method in _deferredSetterMethods!) method();
+			foreach (Action method in _deferredSetterMethods) method();
 			_deferredSetterMethods = null;
 		}
 
@@ -65,33 +69,28 @@ internal abstract partial class Component : PanelContainer
 
 	private protected void SetProperty<T>(ref T property, T value, [CallerMemberName] string propertyName = "")
 	{
-		if (!IsNodeReady())
+		if (!IsNodeReady()) // Node is not yet ready, delay the setter method to prevent potential bugs.
 		{
-			// Backing fields follow this convention:
-			// _propertyName
-			FieldInfo? backingField = _cachedType.GetField($"_{propertyName.ToLowerInvariant()[0]}{propertyName[1..]}", BackingFieldBindingFlags);
-			if (backingField == null)
-			{
-				GD.PrintErr($"[{_cachedType.Name}] Failed to find backing field for property '{propertyName}'");
-				return;
-			}
+			// Get the compiler-generated backing field.
+			FieldInfo backingField = _cachedType.GetField($"<{propertyName}>k__BackingField", PropertyBindingFlags)!;
 
 			// As we want the new value to be visible, the backing field is set beforehand.
 			backingField.SetValue(this, value);
 
-			_deferredSetterMethods!.Add(() =>
+			_deferredSetterMethods?.Add(() =>
 			{
 				T property = (T)backingField.GetValue(this)!;
-				SetBackingField(ref property);
+				SetPropertyInternal(ref property);
 			});
-			return;
 		}
-
-		SetBackingField(ref property);
+		else // Node is ready, call the setter method immediately.
+		{
+			SetPropertyInternal(ref property);
+		}
 		return;
 
 		// ReSharper disable once RedundantAssignment
-		void SetBackingField(ref T property)
+		void SetPropertyInternal(ref T property)
 		{
 			CallSetterHookMethod("ModifyNew", SetterHookMethodBehavior.ModifyValue);
 			CallSetterHookMethod("PreSet", SetterHookMethodBehavior.UseValue);
@@ -134,7 +133,7 @@ internal abstract partial class Component : PanelContainer
 
 	private protected void SetNodeIdentifier(Node node, string identifier)
 	{
-		if (node is Control || node is Window) node.Set(Control.PropertyName.ThemeTypeVariation, $"{_cachedType.Name}_{identifier}");
+		(node as Control)?.ThemeTypeVariation = $"{_cachedType.Name}_{identifier}";
 		node.Name = identifier;
 	}
 

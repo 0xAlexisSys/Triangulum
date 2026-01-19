@@ -2,7 +2,7 @@ using Godot;
 
 namespace Triangulum.Classes;
 
-[Tool, GlobalClass, Icon($"{IconsPath}/2DNodes.svg")]
+[GlobalClass, Icon($"{IconsPath}/2DNodes.svg"), Tool]
 internal partial class AppCanvas : CanvasLayer
 {
     [Export]

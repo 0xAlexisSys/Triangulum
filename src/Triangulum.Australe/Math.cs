@@ -17,11 +17,7 @@ public static class Math
 
     public static bool TryEvaluateNumberExpression(string expression, out NumberExprResult result)
     {
-        #if NET7_0_OR_GREATER
-        result = 0.0M;
-        #else
-        result = 0.0D;
-        #endif
+	    result = (NumberExprResult)0.0;
 
         if (expression.IsWhiteSpace()) return false;
 

@@ -11,7 +11,7 @@ using InvalidEnumArgumentException = System.ComponentModel.InvalidEnumArgumentEx
 
 namespace Triangulum.Components;
 
-[Tool, GlobalClass, Icon($"{IconsPath}/SpinBox.svg")]
+[GlobalClass, Icon($"{IconsPath}/SpinBox.svg"), Tool]
 internal partial class NumberBox : Component
 {
     public enum ValueDataType : u8
@@ -115,9 +115,10 @@ internal partial class NumberBox : Component
 
         NInputBox = new()
         {
+            Text = _oldInputBoxText,
             KeepEditingOnTextSubmit = true,
             VirtualKeyboardType = LineEdit.VirtualKeyboardTypeEnum.NumberDecimal,
-            CustomMinimumSize = StringEditMinSize,
+            CustomMinimumSize = ComponentInputMinSize,
             SizeFlagsHorizontal = SizeFlags.ExpandFill,
         };
         SetNodeIdentifier(NInputBox, "InputBox");
@@ -125,7 +126,7 @@ internal partial class NumberBox : Component
         {
             if (TryEvaluateNumberExpression(newText, out NumberExprResult result))
             {
-                #if NET7_0_OR_GREATER
+                #if NET7_0_OR_GREATER && NUMBER_EXPR_TO_DECIMAL
                 Value = (f64)result;
                 #else
                 Value = result;

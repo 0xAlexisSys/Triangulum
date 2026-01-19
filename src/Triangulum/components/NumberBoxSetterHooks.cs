@@ -1,4 +1,5 @@
 ﻿using static Triangulum.Australe.Math;
+
 using Godot;
 using Triangulum.Australe.Extensions;
 
@@ -30,9 +31,13 @@ internal partial class NumberBox
 		}
 	}
 
-	private void PostSetEnabled() => NInputBox?.Set(LineEdit.PropertyName.Editable, Enabled);
+	private void PostSetEnabled()
+	{
+		NInputBox?.Editable = Enabled;
+		UpdateButtons();
+	}
 
-	private void PostSetTooltip() => NInputBox?.Set(Control.PropertyName.TooltipText, Tooltip);
+	private void PostSetTooltip() => NInputBox?.TooltipText = Tooltip;
 
 	private void PostSetValueType() => PostSetValue();
 	#endregion // Main
@@ -87,12 +92,12 @@ internal partial class NumberBox
 		}
 	}
 
-	private void PostSetLabelUppercase() => NLabel?.Set(Label.PropertyName.Uppercase, LabelUppercase);
+	private void PostSetLabelUppercase() => NLabel?.Uppercase = LabelUppercase;
 
-	private void PostSetLabelAlignment() => NLabel?.Set(Label.PropertyName.HorizontalAlignment, (i64)LabelAlignment);
+	private void PostSetLabelAlignment() => NLabel?.HorizontalAlignment = LabelAlignment;
 	#endregion // Label
 	#region Input Box
-	private void PostSetInputBoxPlaceholder() => NInputBox?.Set(LineEdit.PropertyName.PlaceholderText, InputBoxPlaceholder);
+	private void PostSetInputBoxPlaceholder() => NInputBox?.PlaceholderText = InputBoxPlaceholder;
 
 	private static string ModifyNewInputBoxSecretCharacter(string value)
 	{
@@ -112,25 +117,25 @@ internal partial class NumberBox
 		}
 	}
 
-	private void PostSetInputBoxSelectable() => NInputBox?.Set(LineEdit.PropertyName.SelectingEnabled, InputBoxSelectable);
+	private void PostSetInputBoxSelectable() => NInputBox?.SelectingEnabled = InputBoxSelectable;
 
-	private void PostSetInputBoxDeselectOnFocusLoss() => NInputBox?.Set(LineEdit.PropertyName.DeselectOnFocusLossEnabled, InputBoxDeselectOnFocusLoss);
+	private void PostSetInputBoxDeselectOnFocusLoss() => NInputBox?.DeselectOnFocusLossEnabled = InputBoxDeselectOnFocusLoss;
 
-	private void PostSetInputBoxAlignment() => NInputBox?.Set(LineEdit.PropertyName.Alignment, (i64)InputBoxAlignment);
+	private void PostSetInputBoxAlignment() => NInputBox?.Alignment = InputBoxAlignment;
 	#endregion // Input Box
 	#region Input Box > Buttons
-	private void PostSetIncrementButtonIcon() => NIncrementButton?.Set(Button.PropertyName.Icon, IncrementButtonIcon!);
+	private void PostSetIncrementButtonIcon() => NIncrementButton?.Icon = IncrementButtonIcon;
 
-	private void PostSetDecrementButtonIcon() => NDecrementButton?.Set(Button.PropertyName.Icon, DecrementButtonIcon!);
+	private void PostSetDecrementButtonIcon() => NDecrementButton?.Icon = DecrementButtonIcon;
 	#endregion // Input Box > Buttons
 	#region Input Box > Context Menu
-	private void PostSetContextMenuEnabled() => NInputBox?.Set(LineEdit.PropertyName.ContextMenuEnabled, ContextMenuEnabled);
+	private void PostSetContextMenuEnabled() => NInputBox?.ContextMenuEnabled = ContextMenuEnabled;
 
-	private void PostSetContextMenuShortcutKeysEnabled() => NInputBox?.Set(LineEdit.PropertyName.ShortcutKeysEnabled, ContextMenuShortcutKeysEnabled);
+	private void PostSetContextMenuShortcutKeysEnabled() => NInputBox?.ShortcutKeysEnabled = ContextMenuShortcutKeysEnabled;
 	#endregion // Input Box > Context Menu
 	#region Input Box > Virtual Keyboard
-	private void PostSetVirtualKeyboardEnabled() => NInputBox?.Set(LineEdit.PropertyName.VirtualKeyboardEnabled, VirtualKeyboardEnabled);
+	private void PostSetVirtualKeyboardEnabled() => NInputBox?.VirtualKeyboardEnabled = VirtualKeyboardEnabled;
 
-	private void PostSetVirtualKeyboardShowOnFocus() => NInputBox?.Set(LineEdit.PropertyName.VirtualKeyboardShowOnFocus, VirtualKeyboardShowOnFocus);
+	private void PostSetVirtualKeyboardShowOnFocus() => NInputBox?.VirtualKeyboardShowOnFocus = VirtualKeyboardShowOnFocus;
 	#endregion // Input Box > Virtual Keyboard
 }

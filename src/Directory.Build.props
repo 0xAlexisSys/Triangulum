@@ -1,8 +1,10 @@
 <Project>
     <PropertyGroup>
-        <LangVersion>12</LangVersion>
+        <LangVersion>14</LangVersion>
         <Nullable>enable</Nullable>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
+        <DefineConstants>$(DefineConstants);NUMBER_EXPR_TO_DECIMAL</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>

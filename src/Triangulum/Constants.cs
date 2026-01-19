@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Triangulum.Core;
+namespace Triangulum;
 
 internal static class Enum
 {
@@ -20,8 +20,11 @@ internal static class Const
         ResourceLoader.Load<Theme>($"{ThemesPath}/Triangulum.tres"),
         null,
     ];
-    public static readonly GDVector2 StringEditMinSize = new((RealT)0.0, (RealT)36.0);
+    public static readonly GDVector2 ComponentInputMinSize = new((RealT)0.0, (RealT)36.0);
 
+	/// <summary>
+	/// Cached <see cref="StringName"/>s for groups, for fast lookup.
+	/// </summary>
     public static class GroupName
     {
         public static readonly StringName Components = "Components";

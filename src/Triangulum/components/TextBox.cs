@@ -4,7 +4,7 @@ using Triangulum.Australe.Extensions;
 
 namespace Triangulum.Components;
 
-[Tool, GlobalClass, Icon($"{IconsPath}/LineEdit.svg")]
+[GlobalClass, Icon($"{IconsPath}/LineEdit.svg"), Tool]
 internal partial class TextBox : Component
 {
     public const i32 MaxLengthInfinity = 0;
@@ -34,7 +34,7 @@ internal partial class TextBox : Component
         NInputBox = new()
         {
             KeepEditingOnTextSubmit = true,
-            CustomMinimumSize = StringEditMinSize,
+            CustomMinimumSize = ComponentInputMinSize,
             SizeFlagsVertical = SizeFlags.ExpandFill,
         };
         SetNodeIdentifier(NInputBox, "InputBox");

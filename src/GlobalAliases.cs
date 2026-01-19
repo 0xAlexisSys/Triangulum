@@ -1,6 +1,7 @@
 // ReSharper disable RedundantUsingDirective.Global
 #pragma warning disable IDE0079
 #pragma warning disable IDE0005
+#pragma warning disable IDE0049
 
 global using i8 = System.SByte;
 global using i16 = System.Int16;
@@ -31,7 +32,7 @@ global using Vector2 = System.Numerics.Vector2;
 global using Vector3 = System.Numerics.Vector3;
 global using Vector4 = System.Numerics.Vector4;
 
-#if NET7_0_OR_GREATER
+#if NET7_0_OR_GREATER && NUMBER_EXPR_TO_DECIMAL
 global using NumberExprResult = System.Decimal;
 #else
 global using NumberExprResult = System.Double;
